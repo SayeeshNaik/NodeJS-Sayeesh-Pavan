@@ -1,1 +1,0 @@
-console.log("Updating DB configurations in this file")
