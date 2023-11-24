@@ -1,17 +1,18 @@
 const fs = require('fs');
 
 // Data File Path
-const file = 'C:/Users/SaishNaik/Downloads/alumnidataexport.json';
+const file = 'aluminiData.json';
 
 // Read JSON file
 const fileData = fs.readFileSync(file, 'utf8');
 const data = JSON.parse(fileData);
 
-const keyNames = ['A_Occupation'];
-const valueCounts = {};
+const keyNames = ['A_Name','A_Occupation'];
+var outputData = {}
 
-data.forEach(item => {
-    keyNames.forEach(key => {
+keyNames.forEach(key => {
+    var valueCounts = {};
+    data.forEach(item => {
         const value = item[key];
         try {
             if (value in valueCounts) {
@@ -22,7 +23,11 @@ data.forEach(item => {
         } catch (error) {
             console.error(error);
         }
-    });
+
+    },
+    outputData[key] = valueCounts,
+    valueCounts
+    );
 });
 
-console.log(valueCounts);
+console.log(outputData);
